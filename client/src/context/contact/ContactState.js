@@ -18,8 +18,8 @@ const ContactState = (props) => {
     contacts: [
       {
         type: "professional",
-        _id: "5ebabd2ed24a95447c735f53",
-        name: "John DOe",
+        id: "5ebabd2ed24a95447c735f53",
+        name: "John Doe",
         email: "John@gmail.com",
         phone: "212-555-414",
         user: "5eaedb173eb3e0411cb233d5",
@@ -28,7 +28,7 @@ const ContactState = (props) => {
       },
       {
         type: "personal",
-        _id: "5ebabbffb609bc546c335444",
+        id: "5ebabbffb609bc546c335444",
         name: "Melisa williams",
         email: "mes@gmail.com",
         phone: "212-353-414",
@@ -38,7 +38,7 @@ const ContactState = (props) => {
       },
       {
         type: "personal",
-        _id: "5eb7ee9c3199925178f259ae",
+        id: "5eb7ee9c3199925178f259ae",
         name: "Harry black",
         email: "harry@gmail.com",
         phone: "212-313-414",
@@ -48,7 +48,7 @@ const ContactState = (props) => {
       },
       {
         type: "professional",
-        _id: "5eb7ede43199925178f259ac",
+        id: "5eb7ede43199925178f259ac",
         name: "Sara Smith",
         email: "sara@gmail.com",
         phone: "111-111-111",
@@ -57,6 +57,7 @@ const ContactState = (props) => {
         __v: 0,
       },
     ],
+    current: null,
   };
 
   const [state, dispatch] = useReducer(contactReducer, initalState);
@@ -68,10 +69,19 @@ const ContactState = (props) => {
   };
 
   // Delete Contact
+  const deleteContact = (id) => {
+    dispatch({ type: DELETE_CONTACT, payload: id });
+  };
 
   // Set Current Contact
+  const setCurrent = (contact) => {
+    dispatch({ type: SET_CURRENT, payload: contact });
+  };
 
   // Clear Current Contact
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
 
   // Update Current Contact
 
@@ -83,7 +93,11 @@ const ContactState = (props) => {
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
+        current: state.current,
         addContact,
+        deleteContact,
+        setCurrent,
+        clearCurrent,
       }}
     >
       {props.children}
