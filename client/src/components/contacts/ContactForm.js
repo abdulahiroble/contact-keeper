@@ -40,12 +40,6 @@ const ContactForm = () => {
       updateContact(contact);
     }
     clearAll();
-    // setContact({
-    //   name: "",
-    //   email: "",
-    //   phone: "",
-    //   type: "personal",
-    // });
   };
 
   const clearAll = () => {
